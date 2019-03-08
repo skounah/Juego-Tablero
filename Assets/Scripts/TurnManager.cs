@@ -7,7 +7,9 @@ public class TurnManager : MonoBehaviour
     static Dictionary<string, List<TacticsMove>> units = new Dictionary<string, List<TacticsMove>>();
     static Queue<string> turnKey = new Queue<string>(); // TURNO PARA CADA EQUIPO
     static Queue<TacticsMove> turnTeam = new Queue<TacticsMove>(); // TURNO PARA CADA FICHA - VER COMO CAMBIAR PARA QUE NO SEA COLA
+
 	static int count = 4;
+	static TacticsMove currentUnit;
 
 	// Use this for initialization
 	void Start () 
@@ -24,11 +26,11 @@ public class TurnManager : MonoBehaviour
             InitTeamTurnQueue();
         }*/
 
-		/*if(count == 0)
+		if(count == 0)
 		{
 			InitTeamTurnQueue ();
 			Debug.Log ("NO QUEDAN MAS MOVIMIENTOS");
-		}*/
+		}
 
 	}
 
@@ -62,7 +64,16 @@ public class TurnManager : MonoBehaviour
 			//Debug.Log (turnTeam.Count);
         }
     }
-
+	public static void StartTurn2()
+	{
+		if (count > 0)
+		{
+			currentUnit.BeginTurn();
+			Debug.Log (count);
+			//Debug.Log (turnTeam);
+			//Debug.Log (turnTeam.Count);
+		}
+	}
     public static void EndTurn()
     {
         TacticsMove unit = turnTeam.Dequeue();
@@ -76,7 +87,7 @@ public class TurnManager : MonoBehaviour
         {
             string team = turnKey.Dequeue();
             turnKey.Enqueue(team);
-            InitTeamTurnQueue();
+            //InitTeamTurnQueue();
         }
     }
 
@@ -93,7 +104,7 @@ public class TurnManager : MonoBehaviour
 		{
 			string team = turnKey.Dequeue();
 			turnKey.Enqueue(team);
-			InitTeamTurnQueue();
+			//InitTeamTurnQueue();
 		}
 	}
 
@@ -109,8 +120,9 @@ public class TurnManager : MonoBehaviour
 				{
 					Debug.Log ("Jugador DESDE TacticaMove Update() clicado");
 					TurnManager.AddUnit(hit.collider.GetComponent <TacticsMove>());
-					StartTurn ();
-					InitTeamTurnQueue();
+					currentUnit = hit.collider.GetComponent <TacticsMove> ();
+					StartTurn2 ();//OJO 
+					//InitTeamTurnQueue();
 				}
 			}
 		}

@@ -5,52 +5,69 @@ using UnityEngine;
 public class TurnManagerBeta : MonoBehaviour {
 
 	public int count = 4;
-	static Dictionary<string, List<TacticsMove>> units = new Dictionary<string, List<TacticsMove>>(); //??
-	static Queue<string> turnKey = new Queue<string>(); // TURNO PARA CADA EQUIPO
 	static TacticsMove currentUnit;
+	//static bool turno;
+
+
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
+	void Update () 
+	{
+		SelectUnit ();
 		if (count == 0) {
-			inicioTurnoEquipo ();
+			InicioTurnoEquipo ();
 		}
 	}
 
-	public void inicioTurnoEquipo () {
+	public void InicioTurnoEquipo () 
+	{
 		count=4;
 	}
 
-	public void inicioTurno () {
-
-	}
-
-	public void finTurno () {
-		count--;
-	}
-
-	public static void AddUnit(TacticsMove unit)
+	public void CambioTurnoEquipo()
 	{
-		List<TacticsMove> list;
-		if (!units.ContainsKey(unit.tag))
-		{
-			list = new List<TacticsMove>();
-			units[unit.tag] = list;
+	
+	}
 
-			if (!turnKey.Contains(unit.tag))
+	public void InicioJugada () 
+	{
+		currentUnit.BeginTurn();
+	}
+
+	public void FinTurno ()
+	{
+		count--;
+		currentUnit.EndTurn();
+		currentUnit.moved = true;
+		if (count == 0) 
+		{
+			CambioTurnoEquipo ();
+		}
+	}
+
+	public void SelectUnit()
+	{
+		if (Input.GetMouseButtonDown (0)) 
+		{
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+			RaycastHit hit;
+			if (Physics.Raycast (ray, out hit)) 
 			{
-				turnKey.Enqueue(unit.tag);
+				if (hit.collider.tag == "Player") 
+				{
+					//HACER IF PARA COMPROBAR SI YA SE HA MOVIDO.
+					Debug.Log ("Jugador clicado");
+					currentUnit = hit.collider.GetComponent <TacticsMove> ();
+					InicioJugada ();
+				}
 			}
 		}
-		else
-		{
-			list = units[unit.tag];
-		}
-
-		list.Add(unit);
 	}
+
+
 }
