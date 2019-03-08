@@ -5,34 +5,36 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour 
 {
     static Dictionary<string, List<TacticsMove>> units = new Dictionary<string, List<TacticsMove>>();
-    static Queue<string> turnKey = new Queue<string>();
-    static Queue<TacticsMove> turnTeam = new Queue<TacticsMove>();
+    static Queue<string> turnKey = new Queue<string>(); // TURNO PARA CADA EQUIPO
+    static Queue<TacticsMove> turnTeam = new Queue<TacticsMove>(); // TURNO PARA CADA FICHA - VER COMO CAMBIAR PARA QUE NO SEA COLA
 	static int count = 4;
 
 	// Use this for initialization
 	void Start () 
 	{
-		
+		//InitTeamTurnQueue();
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
 		SelectUnit ();
-        if (turnTeam.Count == 0)
+        /*if (turnTeam.Count == 0)
         {
             InitTeamTurnQueue();
-        }
+        }*/
 
-		if(count == 0)
+		/*if(count == 0)
 		{
+			InitTeamTurnQueue ();
 			Debug.Log ("NO QUEDAN MAS MOVIMIENTOS");
-		}
+		}*/
 
 	}
 
     static void InitTeamTurnQueue()
     {
+		//count = 4;
 		try
 		{
 			List<TacticsMove> teamList = units[turnKey.Peek()];
@@ -43,12 +45,11 @@ public class TurnManager : MonoBehaviour
 				//Debug.Log (count);
 				//Debug.Log (turnTeam);
 	        }
-		} catch {
+			StartTurn();
+		} catch 
+		{
 			Debug.Log ("Jugador no clicado");
 		}
-
-		//count = 4;
-        StartTurn();
     }
 
     public static void StartTurn()
@@ -109,7 +110,7 @@ public class TurnManager : MonoBehaviour
 					Debug.Log ("Jugador DESDE TacticaMove Update() clicado");
 					TurnManager.AddUnit(hit.collider.GetComponent <TacticsMove>());
 					StartTurn ();
-					//InitTeamTurnQueue();
+					InitTeamTurnQueue();
 				}
 			}
 		}
