@@ -5,13 +5,22 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: b57b31ba04aac8b40bb3ec35892abd98
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 2690cf1df86ec9a45a9d226280cc4255
+  - enabled: 1
+    path: Assets/Scenes/Options.unity
+    guid: 02e69947ebf1ec54eb67cf1c2da08e92
+  - enabled: 1
+    path: Assets/Scenes/Store.unity
+    guid: c540258fcce6a474e817194053d16b34
+  - enabled: 1
+    path: Assets/Scenes/Teams.unity
+    guid: c7e76d5f55a112448b27cc9f87b1def1
+  - enabled: 1
+    path: Assets/Scenes/TeamCreation.unity
+    guid: 40116c4af15e1444f8e21d1de1f4678f
   m_configObjects: {}

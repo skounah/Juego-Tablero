@@ -1,15 +1,17 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\TurnManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\HealthBarControl.cs">
     <Files>
-      <File FileName="Assets\Scripts\TacticsMove.cs" Line="45" Column="11" />
-      <File FileName="Assets\Scripts\TurnManager.cs" Line="124" Column="26" />
+      <File FileName="Assets\Scripts\TacticsMove.cs" Line="23" Column="17" />
+      <File FileName="Assets\Scripts\TacticsCombat.cs" Line="7" Column="26" />
       <File FileName="Assets\Scripts\PlayerMove.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\TacticsCamera.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\NPCMove.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MainMenu.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\TacticsCamera.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Tile.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\TurnManagerBeta.cs" Line="23" Column="10" NotebookId="1" />
+      <File FileName="Assets\Scripts\BDManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\TurnManagerBeta.cs" Line="150" Column="20" />
+      <File FileName="Assets\Scripts\TurnManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\HealthBarControl.cs" Line="7" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

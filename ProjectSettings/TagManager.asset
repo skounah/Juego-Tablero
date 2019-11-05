@@ -4,7 +4,14 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Cube-Visual
+  - Tile
+  - NPC
+  - Movimientos
+  - Canvas
+  - DragBox
+  - DropBox
+  - ClickBox
+  - Rival
   layers:
   - Default
   - TransparentFX
