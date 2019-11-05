@@ -9,10 +9,12 @@ public class Tile : MonoBehaviour//, IDropHandler, IPointerEnterHandler, IPointe
     public bool current = false;
     public bool target = false;
     public bool selectable = false;
+	public bool atackable = false;
 	public bool aliHere = false;
 	public bool enemyHere = false;
 	public bool dropAliArea = false;
 	public bool dropEnemyArea = false;
+
 
     public List<Tile> adjacencyList = new List<Tile>();
 	public List<Tile> playerOnRangeList = new List<Tile> ();
@@ -44,10 +46,13 @@ public class Tile : MonoBehaviour//, IDropHandler, IPointerEnterHandler, IPointe
         {
             GetComponent<Renderer>().material.color = Color.green;
         }
-		else if (selectable && !enemyHere && !aliHere)
+		else if (selectable && !enemyHere && !aliHere && !atackable)
         {
             GetComponent<Renderer>().material.color = Color.yellow;
-        }
+		}
+		else if (atackable){
+			GetComponent<Renderer>().material.color = Color.red;
+		}
 		else if (aliHere)
 		{
 			GetComponent<Renderer>().material.color = Color.blue;
@@ -75,7 +80,7 @@ public class Tile : MonoBehaviour//, IDropHandler, IPointerEnterHandler, IPointe
         selectable = false;
 		aliHere = false;
 		enemyHere = false;
-
+		atackable = false;
         visited = false;
         parent = null;
         distance = 0;
@@ -109,22 +114,20 @@ public class Tile : MonoBehaviour//, IDropHandler, IPointerEnterHandler, IPointe
             {
                 RaycastHit hit;
 
-                
 				// SI NO HAY UNA FICHA ENCIMA 
 				if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1) || (tile == target) )
 				{
 					adjacencyList.Add(tile);
-
 				}
 				//PRUEBAS
-				/*if (Physics.Raycast (tile.transform.position, Vector3.up, out hit, 1) || (tile == target)) 
+				if (Physics.Raycast (tile.transform.position, Vector3.up, out hit, 1) || (tile == target)) 
 				{
-					
-					//adjacencyList.Add (tile);
-				}*/	
+					playerOnRangeList.Add (tile);
+				}	
             }
         }
     }
+
 	//PRUEBAS DE COMPROVACION DE CASILLA(PARA LA LISTA DEL MOV)
 	public void CheckTile2(Vector3 direction, float jumpHeight, Tile target)
 	{
@@ -144,6 +147,7 @@ public class Tile : MonoBehaviour//, IDropHandler, IPointerEnterHandler, IPointe
 					//COMPROBAR SI CHOCA CON OBJETO ALI O RIVAL
 					if (hit.transform.tag == "NPC") {
 						enemyHere = true;
+
 					} 
 					if (hit.transform.tag == "Player") {
 						aliHere = true;
@@ -155,7 +159,9 @@ public class Tile : MonoBehaviour//, IDropHandler, IPointerEnterHandler, IPointe
 			}
 		}
 	}
-	//PRUEBAS PARA DESPLEGAR FICHAS
+
+
+	//PRUEBAS PARA DESPLEGAR FICHAS MAS ADELANTE
 	//public Arrastrar.Slot tipoCasilla = Arrastrar.Slot.MANO;//cojer de casilla tablero
 
 	/*public void OnPointerEnter(PointerEventData eventData) {

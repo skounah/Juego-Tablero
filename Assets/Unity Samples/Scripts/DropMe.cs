@@ -18,8 +18,8 @@ public class DropMe : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
 	
 	public void OnDrop(PointerEventData data)
 	{
-		containerImage.color = normalColor;
-		
+		//containerImage.color = normalColor;
+		Debug.Log(receivingImage);
 		if (receivingImage == null)
 			return;
 		

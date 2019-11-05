@@ -59,7 +59,7 @@ public class PlayerMove : TacticsMove
 	}
 
 
-	/*ME SOBRA CREO
+	/*USAR PARA SELECCIONAR RIVALES O ALIADOS 
 	 * void CheckMouseForCurrent()
 	{
 		if (Input.GetMouseButtonDown (0)) {

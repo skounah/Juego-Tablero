@@ -16,7 +16,7 @@ public class NPCMove : TacticsMove
 	void Update () 
 	{
         Debug.DrawRay(transform.position, transform.forward);
-
+		//FindNearestTarget();
         if (!turn)
         {
             return;
@@ -24,15 +24,19 @@ public class NPCMove : TacticsMove
 
         if (!moving)
         {
-            FindNearestTarget();
+			FindSelectableTiles();
+            //FindNearestTarget();
             CalculatePath();
-            FindSelectableTiles();
-            actualTargetTile.target = true;
+            //actualTargetTile.target = true;
         }
         else
         {
             Move();
         }
+		if (moved == true) {
+			moving = false;
+			EndTurn ();
+		}
 	}
 
     void CalculatePath()
@@ -41,7 +45,7 @@ public class NPCMove : TacticsMove
         FindPath(targetTile);
     }
 
-    void FindNearestTarget()
+    public void FindNearestTarget()
     {
         GameObject[] targets = GameObject.FindGameObjectsWithTag("Player");
 

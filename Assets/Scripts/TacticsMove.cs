@@ -11,21 +11,37 @@ public class TacticsMove : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEn
     GameObject[] tiles;
 
     Stack<Tile> path = new Stack<Tile>();
-    Tile currentTile;
+    public Tile currentTile;
 
+	//VARIABLES PARA ESTADO DE LA FICHA (TURNO)
 	public bool moved = false;
 	public bool played = false;
 	public bool desplegada = false;
-	public bool clicked=false;
+	public bool clicked = false;
     public bool moving = false;
-    public int moveRange = 4;
-    public float jumpHeight = 1;
-    public float moveSpeed = 2;
-    public float jumpVelocity = 4.5f;
+    
+	//BARRA DE VIDA
+    
+	//VARIABLES PARA EL COMBATE
+	public int moveRange = 4;
+	public float jumpHeight = 1;
+	public int live = 100;
+	public int patk = 10;
+	public int matk = 10;
+	public int parmor = 10;
+	public int marmor = 10;
+	public int rangeatk = 1;
+	public int critchance = 1;
+	public int dodgechance = 1;
+	public int atkspeed = 1;
+	public int armorpen = 1;
+	public string description = "bla bla bla";
 
+	/// OTRAS VARIABLES MOVIMIENTO
     Vector3 velocity = new Vector3();
     Vector3 heading = new Vector3();
-
+	float moveSpeed = 2;
+	float jumpVelocity = 4.5f;
     float halfHeight = 0;
 
     bool fallingDown = false;
@@ -38,9 +54,9 @@ public class TacticsMove : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEn
     protected void Init()
     {
         tiles = GameObject.FindGameObjectsWithTag("Tile");
-
         halfHeight = GetComponent<Collider>().bounds.extents.y-0.30f;
-		//HACER ERL SPAWN - NO PRIORIDAD
+
+		//HACER ERL SPAWN - NO PRIORITARIO 
 		//Debug.Log ("this : " + this);
         //TurnManager.AddUnit(this); // LODEJO DE MOMENTO PARA PRUEBAS
 
@@ -92,10 +108,14 @@ public class TacticsMove : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEn
         while (process.Count > 0)
         {
             Tile t = process.Dequeue();
+			selectableTiles.Add(t);
+			t.selectable = true;
 
-            selectableTiles.Add(t);
-            t.selectable = true;
-
+			//PRUEBAS PARA EL RANGO DE ATK
+			if (t.distance <= rangeatk) {
+				t.atackable = true;
+			}
+          
             if (t.distance < moveRange)
             {
                 foreach (Tile tile in t.adjacencyList)
@@ -128,7 +148,7 @@ public class TacticsMove : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEn
 
     public void Move()
     {
-        if (path.Count > 0)
+		if (path.Count > 0 || moved == true)
         {
             Tile t = path.Peek();
             Vector3 target = t.transform.position;
@@ -165,8 +185,12 @@ public class TacticsMove : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEn
         else
         {
             RemoveSelectableTiles();
+			//PONER DE MOMENTO AQUI
             moving = false;
-            TurnManager.EndTurn();
+			moved=true;
+			turn = false;
+			TurnManagerBeta.EndUnitTurn();
+
         }
     }
 
@@ -187,7 +211,7 @@ public class TacticsMove : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEn
 
         selectableTiles.Clear();
     }
-	// IMPORTANTE HACER REMOVETILESOCUPED PARA ELIMINAR LAS CASILLAS QUE YA NO ESTAN OCUPADAS AL MOVERSE
+	// CREO QUE DEPRECATED - IMPORTANTE HACER REMOVETILESOCUPED PARA ELIMINAR LAS CASILLAS QUE YA NO ESTAN OCUPADAS AL MOVERSE
 	/*protected void RemoveOcupedTiles()
 	{
 		if (currentTile != null)
@@ -423,6 +447,7 @@ public class TacticsMove : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEn
         turn = false;
     }
 
+	/// METODOS DE ATAQUE 
 
 	// PRUEBAS DESPLIEGUE FICHAS
 	/*public void OnBeginDrag(PointerEventData eventData) {

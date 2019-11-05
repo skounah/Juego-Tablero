@@ -4,30 +4,43 @@ using UnityEngine;
 
 public class TacticsCamera : MonoBehaviour 
 {
-
+	public bool airView = false;
 	//TODO ARREGLAR LAS ROTACIONES Y BLOQUEAR BOTONONES PARA IMPEDIR ROTACION EN "TOPES DE CAMARA"
     public void RotateLeft()
-    {
-        //transform.Rotate(Vector3.up, 90, Space.Self);
-		transform.Rotate(0,90,0);
-    }
+	{
+		if (airView == false) {
+			//transform.Rotate(Vector3.up, 90, Space.Self);
+			transform.Rotate (0, 90, 0);
+		} else {
+			//ARREGLAR
+			//transform.Rotate(0, 90, 0);
+		}
+	}
 
     public void RotateRight()
     {
-		transform.Rotate(0,-90,0);
-        //transform.Rotate(Vector3.up, -90, Space.Self);
-    }
+		if(airView == false){
+			transform.Rotate(0,-90, 0);
+			//transform.Rotate(Vector3.up, -90, Space.Self);
+		} else {
+			//ARREGLAR
+			//transform.Rotate(0, -90, 0);
+		}
+	}
 
-	public void AirWiew()
+	public void AirView()
 	{
-		transform.Rotate(30,0,0);
-
-
-
+		if (airView == false) {
+			transform.Rotate (30, 0, 0);
+			airView = true;
+		}
 	}
 
 	public void NormalView()
 	{
-		transform.Rotate(-30, 0, 0);
+		if (airView == true) {
+			airView = false;
+			transform.Rotate (-30, 0, 0);
+		}
 	}
 }

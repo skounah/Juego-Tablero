@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TurnManager : MonoBehaviour 
 {
@@ -8,13 +9,19 @@ public class TurnManager : MonoBehaviour
     static Queue<string> turnKey = new Queue<string>(); // TURNO PARA CADA EQUIPO
     static Queue<TacticsMove> turnTeam = new Queue<TacticsMove>(); // TURNO PARA CADA FICHA - VER COMO CAMBIAR PARA QUE NO SEA COLA
 
-	static int count = 4;
+	public Text countText; 
+	public static int count;
 	static TacticsMove currentUnit;
+
 
 	// Use this for initialization
 	void Start () 
 	{
-		//InitTeamTurnQueue();
+		//count = 4;
+		//countText = GameObject.Find ("Movimientos").GetComponent<Text>();
+		countText.text = "Movimientos restantes : " + count.ToString();
+		//SetMovText ();
+		InitTeamTurnQueue();
 	}
 	
 	// Update is called once per frame
@@ -32,11 +39,14 @@ public class TurnManager : MonoBehaviour
 			Debug.Log ("NO QUEDAN MAS MOVIMIENTOS");
 		}
 
+		//PRUEBA
+		//countText.text = "Movimientos restantes : " + count.ToString();
+
 	}
 
     static void InitTeamTurnQueue()
     {
-		//count = 4;
+		count = 4;
 		try
 		{
 			List<TacticsMove> teamList = units[turnKey.Peek()];
@@ -47,7 +57,7 @@ public class TurnManager : MonoBehaviour
 				//Debug.Log (count);
 				//Debug.Log (turnTeam);
 	        }
-			StartTurn();
+			StartTurn2();
 		} catch 
 		{
 			Debug.Log ("Jugador no clicado");
@@ -79,9 +89,10 @@ public class TurnManager : MonoBehaviour
         TacticsMove unit = turnTeam.Dequeue();
         unit.EndTurn();
 		count--;
+		//SetMovText ();
         if (turnTeam.Count > 0)
         {
-            StartTurn();
+            StartTurn2();
         }
         else
         {
@@ -118,7 +129,7 @@ public class TurnManager : MonoBehaviour
 			{
 				if (hit.collider.tag == "Player") 
 				{
-					Debug.Log ("Jugador DESDE TacticaMove Update() clicado");
+					Debug.Log ("Jugador DESDE Turn Manager clicado");
 					TurnManager.AddUnit(hit.collider.GetComponent <TacticsMove>());
 					currentUnit = hit.collider.GetComponent <TacticsMove> ();
 					StartTurn2 ();//OJO 
@@ -148,4 +159,8 @@ public class TurnManager : MonoBehaviour
 
         list.Add(unit);
     }
+
+	/*public static void SetMovText(){
+		countText.text = "Movimientos restantes : " + count.ToString();
+	}*/
 }
