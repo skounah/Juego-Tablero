@@ -147,7 +147,7 @@ public class TurnManagerBeta : MonoBehaviour {
 							if (tile.enemyHere == true) {
 								Debug.Log ("Enemigo fijado iniciar ataque");
 								//PRUEBAS ATQUE
-								enemyHealthBar.setLifePanel(0.6f);
+								enemyHealthBar.setLifePanel(0.4f);
 							}
 						}
 						//VER COMO COMPROBAR SI ESTA EN RANGO DE ATAQUE 
