@@ -22,15 +22,16 @@ public class NPCMove : TacticsMove
             return;
         }
 
-        if (!moving)
+        if (!moving /*&& !moved*/)
         {
 			FindSelectableTiles();
-            //FindNearestTarget();
+            FindNearestTarget();
             CalculatePath();
             //actualTargetTile.target = true;
         }
         else
         {
+			//InvokeRepeating ("Move", 0, 0.4f);
             Move();
         }
 		if (moved == true) {

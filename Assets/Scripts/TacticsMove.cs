@@ -15,27 +15,25 @@ public class TacticsMove : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEn
 
 	//VARIABLES PARA ESTADO DE LA FICHA (TURNO)
 	public bool moved = false;
-	public bool played = false;
+	//public bool played = false;
 	public bool desplegada = false;
 	public bool clicked = false;
     public bool moving = false;
-    
-	//BARRA DE VIDA
-    
+        
 	//VARIABLES PARA EL COMBATE
 	public int moveRange = 4;
 	public float jumpHeight = 1;
-	public int live = 100;
+	/*public int live = 100;
 	public int patk = 10;
 	public int matk = 10;
 	public int parmor = 10;
-	public int marmor = 10;
+	public int marmor = 10;*/
 	public int rangeatk = 1;
-	public int critchance = 1;
+	/*public int critchance = 1;
 	public int dodgechance = 1;
 	public int atkspeed = 1;
 	public int armorpen = 1;
-	public string description = "bla bla bla";
+	public string description = "bla bla bla";*/
 
 	/// OTRAS VARIABLES MOVIMIENTO
     Vector3 velocity = new Vector3();
@@ -187,9 +185,9 @@ public class TacticsMove : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEn
             RemoveSelectableTiles();
 			//PONER DE MOMENTO AQUI
             moving = false;
-			moved=true;
+			moved = true;
 			turn = false;
-			TurnManagerBeta.EndUnitTurn();
+			TurnManagerBeta.EndUnitMoveTurn();
 
         }
     }
@@ -259,7 +257,7 @@ public class TacticsMove : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEn
         }
     }
 
-    void PrepareJump(Vector3 target)
+     void PrepareJump(Vector3 target)
     {
         float targetY = target.y;
         target.y = transform.position.y;
@@ -446,8 +444,7 @@ public class TacticsMove : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEn
     {
         turn = false;
     }
-
-	/// METODOS DE ATAQUE 
+		
 
 	// PRUEBAS DESPLIEGUE FICHAS
 	/*public void OnBeginDrag(PointerEventData eventData) {

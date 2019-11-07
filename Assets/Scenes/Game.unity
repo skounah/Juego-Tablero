@@ -365,7 +365,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 10, y: -10}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 200, y: 30}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &82562340
 MonoBehaviour:
@@ -852,6 +852,11 @@ Prefab:
       propertyPath: panel
       value: 
       objectReference: {fileID: 1510812379}
+    - target: {fileID: 114216560174184858, guid: 1692c0cd287b9b747b2d17c2b4a521be,
+        type: 2}
+      propertyPath: countAtkText
+      value: 
+      objectReference: {fileID: 2001334018}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1692c0cd287b9b747b2d17c2b4a521be, type: 2}
   m_IsPrefabAsset: 0
@@ -968,6 +973,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 96951425}
+  currentlive: 1
+  atacked: 0
+  live: 100
+  patk: 10
+  matk: 10
+  parmor: 10
+  marmor: 10
+  critchance: 1
+  dodgechance: 1
+  atkspeed: 1
+  armorpen: 1
+  description: bla bla bla
 --- !u!1 &457972976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1439,6 +1456,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 13571518}
+  currentlive: 1
+  atacked: 0
+  live: 100
+  patk: 10
+  matk: 10
+  parmor: 10
+  marmor: 10
+  critchance: 1
+  dodgechance: 1
+  atkspeed: 1
+  armorpen: 1
+  description: bla bla bla
 --- !u!1 &698062589
 GameObject:
   m_ObjectHideFlags: 0
@@ -2838,6 +2867,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 571925886}
+  currentlive: 1
+  atacked: 0
+  live: 100
+  patk: 10
+  matk: 10
+  parmor: 10
+  marmor: 10
+  critchance: 1
+  dodgechance: 1
+  atkspeed: 1
+  armorpen: 1
+  description: bla bla bla
 --- !u!114 &1337335989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2853,23 +2894,12 @@ MonoBehaviour:
   turn: 0
   currentTile: {fileID: 0}
   moved: 0
-  played: 0
   desplegada: 0
   clicked: 0
   moving: 0
   moveRange: 4
   jumpHeight: 1
-  live: 100
-  patk: 10
-  matk: 10
-  parmor: 10
-  marmor: 10
   rangeatk: 1
-  critchance: 1
-  dodgechance: 1
-  atkspeed: 1
-  armorpen: 1
-  description: bla bla bla
   actualTargetTile: {fileID: 0}
 --- !u!23 &1337335990
 MeshRenderer:
@@ -2937,7 +2967,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1337335987}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5, y: 0.65, z: -5.5}
+  m_LocalPosition: {x: -0.5, y: 0.65, z: -5.5}
   m_LocalScale: {x: 0.9, y: 0.08, z: 0.9}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3196,7 +3226,7 @@ RectTransform:
   - {fileID: 1363849700}
   - {fileID: 853834524}
   m_Father: {fileID: 1772532672}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -3465,7 +3495,7 @@ RectTransform:
   - {fileID: 1726546260}
   - {fileID: 1657778200}
   m_Father: {fileID: 1772532672}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3995,6 +4025,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 635612148}
+  currentlive: 1
+  atacked: 0
+  live: 100
+  patk: 10
+  matk: 10
+  parmor: 10
+  marmor: 10
+  critchance: 1
+  dodgechance: 1
+  atkspeed: 1
+  armorpen: 1
+  description: bla bla bla
 --- !u!1 &1650240507
 GameObject:
   m_ObjectHideFlags: 0
@@ -4623,6 +4665,7 @@ RectTransform:
   - {fileID: 1766333599}
   - {fileID: 516794006}
   - {fileID: 82562339}
+  - {fileID: 2001334017}
   - {fileID: 1785026748}
   - {fileID: 1510812380}
   - {fileID: 1384933845}
@@ -4667,7 +4710,7 @@ RectTransform:
   - {fileID: 782230343}
   - {fileID: 194163841}
   m_Father: {fileID: 1772532672}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -5011,6 +5054,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 1859570668}
+  currentlive: 1
+  atacked: 0
+  live: 100
+  patk: 10
+  matk: 10
+  parmor: 10
+  marmor: 10
+  critchance: 1
+  dodgechance: 1
+  atkspeed: 1
+  armorpen: 1
+  description: bla bla bla
 --- !u!1 &1961899387
 GameObject:
   m_ObjectHideFlags: 0
@@ -5107,6 +5162,81 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &2001334016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2001334017}
+  - component: {fileID: 2001334019}
+  - component: {fileID: 2001334018}
+  m_Layer: 5
+  m_Name: Ataques
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2001334017
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2001334016}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1772532672}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 220, y: -10}
+  m_SizeDelta: {x: 200, y: 30}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &2001334018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2001334016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 16
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!222 &2001334019
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2001334016}
+  m_CullTransparentMesh: 0
 --- !u!1001 &2035288251
 Prefab:
   m_ObjectHideFlags: 0
@@ -5213,7 +5343,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4162091325908868, guid: e479e3302fe88d34c845024268527df3, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.5
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4162091325908868, guid: e479e3302fe88d34c845024268527df3, type: 2}
       propertyPath: m_LocalPosition.y
