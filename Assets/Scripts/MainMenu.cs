@@ -26,4 +26,10 @@ public class MainMenu : MonoBehaviour {
 		Debug.Log ("Saliendo...");
 		Application.Quit();
 	}
+
+	public void ToMenu(){
+		Debug.Log("Volviendo a inicio");
+		SceneManager.LoadScene("MainMenu");
+	}
+
 }

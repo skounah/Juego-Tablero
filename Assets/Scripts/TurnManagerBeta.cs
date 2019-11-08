@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 //NOTA 03/07/2019:
 //ARREGLAR EL NUMERO DE MOVIMIENTOS PARA EL CAMBIO DE TURNO EN EL TURNO DE NPC HACER QUE LOS NPC
@@ -11,14 +12,18 @@ public class TurnManagerBeta : MonoBehaviour {
 	
 	public Text countMovText;
 	public Text countAtkText;
+	public TextMeshProUGUI endGameText;
+
 	public static int countMovs = 4;
 	public static int countAtks = 4;
 	public static TacticsMove currentUnit;
 	public static TacticsMove currentEnemy;
 	public static TacticsCombat currentAtk;
 
+
 	//PRUEBAS PANELES
 	public GameObject panel;
+	public GameObject endGame;
 	public static TacticsCombat enemyHealthBar;
 
 	//public static bool npcTurn = false;
@@ -31,7 +36,8 @@ public class TurnManagerBeta : MonoBehaviour {
 		currentEnemy = null;
 		enemyHealthBar = null;
 		currentAtk = null;
-
+		//endGame.SetActive (false);
+		endGameText = gameObject.GetComponent<TextMeshProUGUI>();
 		countMovText.text = "Movimientos restantes : " + countMovs.ToString();
 		countAtkText.text = "Movimientos restantes : " + countAtks.ToString();
 
@@ -42,8 +48,25 @@ public class TurnManagerBeta : MonoBehaviour {
 	{
 		SelectUnit ();
 		SelectEnemy ();
-		countAtkText.text = "Ataques restantes : " + countAtks.ToString ();
-		countMovText.text = "Movimientos restantes : " + countMovs.ToString();
+		EndGame ();
+		countAtkText.text = "Ataques restantes : " + countAtks.ToString (); // VER SI ACTUALIZAR SOLO AL ACABAR ATK 
+		countMovText.text = "Movimientos restantes : " + countMovs.ToString(); // VER SI ACTUALIZAR SOLO AL ACABAR MOVIMIENTO 
+	}
+
+	public void EndGame(){
+		GameObject[] units = GameObject.FindGameObjectsWithTag("Player");
+		GameObject[] rivals = GameObject.FindGameObjectsWithTag("NPC");
+		//Debug.Log (units.Length);
+		//Debug.Log (rivals.Length);
+		if (units.Length == 0) {
+			endGame.SetActive (true);
+			//endGameText.text = "DERROTA";
+
+		}
+		if (rivals.Length == 0) {
+			endGame.SetActive (true);
+			//endGameText.text = "DERROTA";
+		}
 	}
 
 	static void InitPlayerTurn() {
@@ -59,7 +82,6 @@ public class TurnManagerBeta : MonoBehaviour {
 			player.moveRange = 4; //CAMBIAR POR EL VALOR QUE TOQUE
 			player.moved = false;
 			player.turn = false;
-			//FALTA REINICIAR ATAQUES
 		}
 		//HACER EL CAMBIO DE NPC A PLAYER 
 		

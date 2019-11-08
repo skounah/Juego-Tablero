@@ -5,59 +5,41 @@ using UnityEngine;
 
 public class TacticsMove : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public bool turn = false;
-
+   
+	//VARIABLES PARA CONTROL DE CASILLAS
     List<Tile> selectableTiles = new List<Tile>();
     GameObject[] tiles;
-
     Stack<Tile> path = new Stack<Tile>();
     public Tile currentTile;
+	public Tile actualTargetTile;
 
 	//VARIABLES PARA ESTADO DE LA FICHA (TURNO)
+	public bool turn = false;
 	public bool moved = false;
 	//public bool played = false;
 	public bool desplegada = false;
 	public bool clicked = false;
     public bool moving = false;
         
-	//VARIABLES PARA EL COMBATE
+	//VARIABLES PARA EL MOVIMIENTO
 	public int moveRange = 4;
 	public float jumpHeight = 1;
-	/*public int live = 100;
-	public int patk = 10;
-	public int matk = 10;
-	public int parmor = 10;
-	public int marmor = 10;*/
-	public int rangeatk = 1;
-	/*public int critchance = 1;
-	public int dodgechance = 1;
-	public int atkspeed = 1;
-	public int armorpen = 1;
-	public string description = "bla bla bla";*/
-
-	/// OTRAS VARIABLES MOVIMIENTO
+	public int rangeatk = 1;//CAMBIAR
     Vector3 velocity = new Vector3();
     Vector3 heading = new Vector3();
 	float moveSpeed = 2;
 	float jumpVelocity = 4.5f;
     float halfHeight = 0;
-
     bool fallingDown = false;
     bool jumpingUp = false;
     bool movingEdge = false;
     Vector3 jumpTarget;
 
-    public Tile actualTargetTile;
-
+ 
     protected void Init()
     {
         tiles = GameObject.FindGameObjectsWithTag("Tile");
         halfHeight = GetComponent<Collider>().bounds.extents.y-0.30f;
-
-		//HACER ERL SPAWN - NO PRIORITARIO 
-		//Debug.Log ("this : " + this);
-        //TurnManager.AddUnit(this); // LODEJO DE MOMENTO PARA PRUEBAS
-
     }
 		
     public void GetCurrentTile()
@@ -191,9 +173,7 @@ public class TacticsMove : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEn
 
         }
     }
-
-
-
+		
     protected void RemoveSelectableTiles()
     {
         if (currentTile != null)
@@ -209,22 +189,6 @@ public class TacticsMove : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEn
 
         selectableTiles.Clear();
     }
-	// CREO QUE DEPRECATED - IMPORTANTE HACER REMOVETILESOCUPED PARA ELIMINAR LAS CASILLAS QUE YA NO ESTAN OCUPADAS AL MOVERSE
-	/*protected void RemoveOcupedTiles()
-	{
-		if (currentTile != null)
-		{
-			currentTile.current = false;
-			currentTile = null;
-		}
-
-		foreach (Tile tile in selectableTiles)
-		{
-			tile.Reset();
-		}
-
-		selectableTiles.Clear();
-	}*/
 
     void CalculateHeading(Vector3 target)
     {
