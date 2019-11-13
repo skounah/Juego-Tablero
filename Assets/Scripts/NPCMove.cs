@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NPCMove : TacticsMove 
 {
     GameObject target;
+	public GameObject panel;
 
 	// Use this for initialization
 	void Start () 
@@ -39,6 +41,17 @@ public class NPCMove : TacticsMove
 			EndTurn ();
 		}
 	}
+
+	public void OnMouseEnter(){
+		Image img = panel.GetComponent<Image> ();
+		img.color = Color.yellow;
+	}
+
+	public void OnMouseExit(){
+		Image img = panel.GetComponent<Image> ();
+		img.color = Color.red;
+	}
+
 
     void CalculatePath()
     {

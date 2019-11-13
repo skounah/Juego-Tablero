@@ -43,4 +43,11 @@ public class TacticsCamera : MonoBehaviour
 			transform.Rotate (-30, 0, 0);
 		}
 	}
+
+	/*public void EndTurn()
+	{
+		TurnManagerBeta prueba = GameObject.GetComponent<TurnManagerBeta> ();
+		prueba.EndUnitAtkTurn ();
+
+	}*/
 }

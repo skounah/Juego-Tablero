@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class TacticsCombat : MonoBehaviour {
 
 	public GameObject panel;
@@ -20,9 +20,23 @@ public class TacticsCombat : MonoBehaviour {
 	public int armorpen = 1;
 	public string description = "bla bla bla";
 
-	public void changePanelcolor (){
-		
-	}
+
+	/*public void changePanelcolor (){
+		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+		RaycastHit hit;
+		if (Physics.Raycast (ray, out hit)) {
+			if (hit.collider.tag == "NPC") {
+				TacticsCombat currentAtk = hit.collider.GetComponent <TacticsCombat> ();
+				Image img = currentAtk.panel.GetComponent<Image> ();
+				img.color = Color.yellow;
+
+				//Debug.Log ("Jugador " + currentUnit + "clicado");
+			} //else {
+				//Image img = panel.GetComponent<Image> ();
+				//img.color = Color.red;
+			//}
+		}
+	}*/
 
 	public void Atack (float damage, GameObject target){
 		//HACER ANIMACION DE ATAQUE (SIMPLE)
@@ -46,12 +60,15 @@ public class TacticsCombat : MonoBehaviour {
 	}
 
 
+		
+
+
 
 	void Start(){
 		//panel.transform.localScale = new Vector3(.4f, 1f);
 	}
 	void  Update(){
-		
+		//changePanelcolor ();
 	}
 
 

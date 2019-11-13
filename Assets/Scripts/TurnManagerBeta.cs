@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-//NOTA 03/07/2019:
-//ARREGLAR EL NUMERO DE MOVIMIENTOS PARA EL CAMBIO DE TURNO EN EL TURNO DE NPC HACER QUE LOS NPC
+//NOTA 03/07/2019: NO ARREGLADO
+//ARREGLAR EL NUMERO DE MOVIMIENTOS PARA EL CAMBIO DE TURNO. EN EL TURNO DE NPC HACER QUE LOS NPC
 //SE MUEVAN 1 a 1 NO TODOS A LA VEZ Y REVISAR EL LA ACTUALIZACION DE MOVED PARA LOS CAMBIOS DE TURNO
+//NOTA 13/11/2019: NO ARREGLADO
+//AREGLAR EL SETEO DE COUNTMOVS CUANDO ACABA TURNO DE EL NPC SE SETEA A 0 DEBERIA SETEARSE a 4
 
 public class TurnManagerBeta : MonoBehaviour {
 	
@@ -29,14 +31,12 @@ public class TurnManagerBeta : MonoBehaviour {
 	//public static bool npcTurn = false;
 	//static Queue<TacticsMove> turnKey = new Queue<TacticsMove>(); // TURNO PARA CADA EQUIPO
 
-
 	void Start () 
 	{
 		currentUnit = null;
 		currentEnemy = null;
 		enemyHealthBar = null;
 		currentAtk = null;
-		//endGame.SetActive (false);
 		endGameText = gameObject.GetComponent<TextMeshProUGUI>();
 		countMovText.text = "Movimientos restantes : " + countMovs.ToString();
 		countAtkText.text = "Movimientos restantes : " + countAtks.ToString();
@@ -69,44 +69,44 @@ public class TurnManagerBeta : MonoBehaviour {
 		}
 	}
 
-	static void InitPlayerTurn() {
-		//Debug.Log ("TurnoJugador");
-		countMovs = 4;
-		countAtks = 4;
+	public static void InitPlayerTurn() {
+		Debug.Log ("TurnoJugador");
 		GameObject[] units = GameObject.FindGameObjectsWithTag("Player");
+		Debug.Log (units.Length);
+		countMovs = units.Length;
+		countAtks = units.Length;
 		foreach (GameObject unit in units) {
 			TacticsMove player = unit.GetComponent<TacticsMove>();
 			TacticsCombat combat = unit.GetComponent<TacticsCombat>();
-			//TacticsCombat atk = unit.GetComponent<TacticsCombat>();
 			combat.atacked = false;
-			player.moveRange = 4; //CAMBIAR POR EL VALOR QUE TOQUE
 			player.moved = false;
 			player.turn = false;
+			player.moveRange = 4; //CAMBIAR POR EL VALOR QUE TOQUE A CADA "HEROE"
 		}
 		//HACER EL CAMBIO DE NPC A PLAYER 
 		
 	}
 
-	static void InitNPCTurn() {
-		//Debug.Log ("TurnoNPC");
-		countMovs = 4;
-		countAtks = 4;
+	public static void InitNPCTurn() {
+		Debug.Log ("TurnoNPC");
 		GameObject[] units = GameObject.FindGameObjectsWithTag("NPC");
+		Debug.Log (units.Length);
+		countMovs = units.Length;
+		countAtks = 0;//units.Length;
 		foreach(GameObject unit in units){
 			TacticsMove npc = unit.GetComponent<TacticsMove>();
 			//npc.moved = false;
 			currentUnit = npc;
-			//PRUEBA
+			//PROBAR EL INVOKE REPEATING
 			NPCMove prueba = unit.GetComponent<NPCMove> ();
 			prueba.FindNearestTarget ();
-
 			currentUnit.BeginTurn ();
 				
 		}
-		InitPlayerTurn ();
+		InitPlayerTurn (); //??? - REVISAR POR QUE NO LO SETEA A 4 Y LO SETEA A 0
 	}
 
-	static void InitUnitTurn(){
+	public static void InitUnitTurn(){
 		if (countMovs > 0) {
 			currentUnit.BeginTurn ();
 			/*Poner De momento aqui - es para que funcione bien el turno de los npc si lo quitas no se le va el turno a los npc  */
@@ -120,19 +120,34 @@ public class TurnManagerBeta : MonoBehaviour {
 		
 	public static void EndUnitMoveTurn(){
 		countMovs--;
+		//Image img = currentAtk.panel.GetComponent<Image> ();
+		//img.color = Color.green;
 		//PRUEBA PARA NO PINTAR LAS CASILLAS DMOVIIMIENTO CUANDO SE HA MOVIDO
 		//currentUnit.moveRange = 0;
-		if (countMovs == 0 /*&& countAtks == 0*/) { //FALTAN LOS ATAQUES
+		if (countMovs == 0 && countAtks == 0) {
 			//npcTurn = true;
 			InitNPCTurn (); // VER COMO CAMBIAR TURNO AL OTRO JUGADOR (4v4)
 		}
 	}
 
 	public static void EndUnitAtkTurn(){
+		//Debug.Log ("prueba");
 		countAtks--;
-		if (/*countMovs == 0 &&*/ countAtks == 0) { //FALTAN LOS ATAQUES
+		//Image img = currentAtk.panel.GetComponent<Image> ();
+		//img.color = Color.green;
+		if (countMovs == 0 && countAtks == 0) { //FALTAN LOS ATAQUES
 			//npcTurn = true;
 			InitNPCTurn (); // VER COMO CAMBIAR TURNO AL OTRO JUGADOR (4v4)
+		}
+	}
+
+	//METODO EN PRUEBAS
+	public void changeTurn(){
+		if (currentUnit != null && currentAtk.atacked == false) {
+			currentAtk.atacked = true;
+			EndUnitAtkTurn ();
+		} else {
+			Debug.Log ("No hay current unit");
 		}
 	}
 
@@ -143,6 +158,8 @@ public class TurnManagerBeta : MonoBehaviour {
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			RaycastHit hit;
 			panel.SetActive(false);
+			//Image img1 = currentAtk.panel.GetComponent<Image> ();
+			//img1.color = Color.green;
 			if (Physics.Raycast (ray, out hit)) 
 			{
 				if (hit.collider.tag == "Player") {
@@ -150,10 +167,15 @@ public class TurnManagerBeta : MonoBehaviour {
 
 					if (currentUnit != null) {
 						currentUnit.turn = false;//PARA LIMPIAR LA ACTUAL AL CLICAR OTRA
+						Image img1 = currentAtk.panel.GetComponent<Image> ();
+						img1.color = Color.green;
 					}
 
 					currentUnit = hit.collider.GetComponent <TacticsMove> ();
 					currentAtk = hit.collider.GetComponent <TacticsCombat> ();
+					//PRUEBAS
+					Image img = currentAtk.panel.GetComponent<Image> ();
+					img.color = Color.blue;
 					if (currentUnit.moved == true) {
 						currentUnit.moveRange = 0;
 						Debug.Log ("Esta unidad ya se ha movido.");
